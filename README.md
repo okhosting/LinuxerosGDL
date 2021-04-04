@@ -13,5 +13,4 @@ Y a nuestro grupo en telegram:
 https://t.me/joinchat/1zW3ELLB0uc3MzBh
 
 ## Presentaciones y material didáctico
-Linux básico
-https://prezi.com/view/mgswXgBVExWSdJ9RXQCH/
+2021-03-21 Linux básico https://prezi.com/view/mgswXgBVExWSdJ9RXQCH/
