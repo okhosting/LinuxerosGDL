@@ -1,0 +1,522 @@
+************************************
+* Linux Package managers explained *
+************************************
+
+---------------------------------
+Package Manager prefered by common distros
+----------------------------------
+
+*Ubuntu/Mint/debian
+--------------
+
+-apt-get/apt (OS/Pkgs/dependencies)
+-aptitude/synaptics (UI)
+-dpkg (Pkgs)
+
+Apt
+The apt command is a powerful command-line tool, which works with Ubuntu’s Advanced Packaging Tool (APT) performing such functions as installation of new software packages, upgrade of existing software packages, updating of the package list index, and even upgrading the entire Ubuntu system.
+
+Some examples of popular uses for the apt utility:
+
+Install a Package: Installation of packages using the apt tool is quite simple. For example, to install the nmap network scanner, type the following:
+
+sudo apt install nmap
+Remove a Package: Removal of a package (or packages) is also straightforward. To remove the package installed in the previous example, type the following:
+
+sudo apt remove nmap
+Tip
+
+Multiple Packages: You may specify multiple packages to be installed or removed, separated by spaces.
+
+Notice
+
+Scripting: While apt is a command-line tool, it is intended to be used interactively, and not to be called from non-interactive scripts. The apt-get command should be used in scripts (perhaps with the --quiet flag). For basic commands the syntax of the two tools is identical.
+
+Also, adding the --purge option to apt remove will remove the package configuration files as well. This may or may not be the desired effect, so use with caution.
+
+Update the Package Index: The APT package index is essentially a database of available packages from the repositories defined in the /etc/apt/sources.list file and in the /etc/apt/sources.list.d directory. To update the local package index with the latest changes made in the repositories, type the following:
+
+sudo apt update
+Upgrade Packages: Over time, updated versions of packages currently installed on your computer may become available from the package repositories (for example security updates). To upgrade your system, first, update your package index as outlined above, and then type:
+
+sudo apt upgrade
+For information on upgrading to a new Ubuntu release see Upgrading.
+
+Actions of the apt command, such as installation and removal of packages, are logged in the /var/log/dpkg.log log file.
+
+8.3.1. Ubuntu Packaging System
+The most important concept to grasp is the Ubuntu packaging system, which may be familiar to those who have already used Debian. In essence, large parts of your system should be considered under the control of the packaging system. These include:
+
+/usr (excluding /usr/local)
+
+/var (you could make /var/local and be safe in there)
+
+/bin
+
+/sbin
+
+/lib
+
+For instance, if you replace /usr/bin/perl, that will work, but then if you upgrade your perl package, the file you put there will be replaced. Experts can get around this by putting packages on “hold” using aptitude or apt-mark.
+
+One of the best installation methods is apt. You can use the command line versions apt and apt-get, the full-screen text version aptitude, or the graphical version synaptic.
+
+Other topics:
+***Note: From source -make/cmake 
+**repo path
+
+*Fedora/CentOS/RedHat
+--------------
+
+-yum/dnf (OS/Pkgs/dependencies)
+-rpm (Pkgs)
+
+YUM is the primary package management tool for installing, updating, removing, and managing software packages in Red Hat Enterprise Linux. YUM performs dependency resolution when installing, updating, and removing software packages. YUM can manage packages from installed repositories in the system or from .rpm packages. The main configuration file for YUM is at /etc/yum.conf, and all the repos are at /etc/yum.repos.d.
+
+[ Read: A quick guide to DNF for yum users ]
+
+You can learn more about adding repositories to your system from this article on how to add a YUM repo from Amy Marrich.
+
+It's easy to manage packages in Linux with YUM. At the command line, enter:
+
+yum -option command
+
+There are many options and commands available to use with YUM. I've listed some commonly-used commands for YUM below:
+
+Command	Purpose
+yum install	Installs the specified packages
+remove	Removes the specified packages
+search	Searches package metadata for keywords
+info	Lists description
+update	Updates each package to the latest version
+repolist	Lists repositories
+history	Displays what has happened in past transactions
+The following are commonly-used options with YUM:
+
+Options	Purpose
+-C	Runs from system cache
+--security	Includes packages that provide a fix for a security issue
+-y	Answers yes to all questions
+--skip-broken	Skips packages causing problems
+-v	Verbose
+The history option gives you an overview of what happened in past transactions. This provides some useful information, like the date when the transaction happened and what command was run.
+
+Image
+yum-history
+You can undo or redo certain transactions using the history command. Here is an example of undoing a transaction:
+
+yum history undo <id>
+YUM provides many options for package management. For detailed option information, look at man yum and yum –help. Also, here is a link to YUM documentation.
+
+RPM (RPM Package Manager)
+------------------------
+RPM is a popular package management tool in Red Hat Enterprise Linux-based distros. Using RPM, you can install, uninstall, and query individual software packages. Still, it cannot manage dependency resolution like YUM. RPM does provide you useful output, including a list of required packages. An RPM package consists of an archive of files and metadata. Metadata includes helper scripts, file attributes, and information about packages.
+
+RPM maintains a database of installed packages, which enables powerful and fast queries. The RPM database is inside /var/lib, and the file is named __db*.
+
+RPM has some basic modes: query, verify, install, upgrade, erase, show querytags, show configuration. At least one of these modes needs to be selected to perform package management tasks. Every mode has its own set of options. For example, install mode i has its own set of installation options. Options for the modes are found on the RPM man pages at man rpm.
+
+Some commonly-used modes are listed below:
+
+Mode	Description
+-i	Installs a package
+-U	Upgrades a package
+-e	Erases a package
+-V	Verifies a package
+-q	Queries a package
+Here are some commonly-used general options:
+
+General options	Purpose
+-? | --help	Prints help
+--version	Prints version number
+-v	Prints verbose output
+To install or upgrade an .rpm package using RPM, issue this command:
+
+rpm -i package-file
+
+rpm -U package-file
+
+rpm -ivh package-file
+
+The flag -i is for install, U is for upgrade, v for verbose, h for hash (this option displays the # as a progress bar for the operation). In this example, v and h are optional flags.
+
+DNF
+-----
+Installation
+DNF comes with Fedora since version 18, but it can also be installed by using yum command:
+
+# yum install dnf
+As of Fedora 22, yum has been replaced with DNF and doesn't need to be installed.
+
+🔗 Usage
+In the basic methods, DNF can be used almost exactly as yum to search, install or remove packages:
+
+# dnf search audacity 
+# dnf install audacity 
+# dnf remove audacity 
+	
+**repo path (commonly)
+
+*Suse
+-------
+
+-Zypper
+
+Running zypper without any command will print out a list of all the available commands.
+
+$ zypper
+
+Updating the Zypper database
+This is one of the most common functions of zypper to keep its local package database updated with the package server.
+
+$ sudo zypper refresh
+
+Instead of using “refresh”, you can also use the abbreviation “ref”.
+
+$ sudo zypper ref
+
+It’s also possible to force zypper to rebuild its local database. This can be useful in situations, for example, if the database is corrupted.
+
+$ sudo zypper refresh -fdb
+
+Update system packages
+To grab and install all the latest package updates from openSUSE, run the following command.
+
+$ sudo zypper update
+
+However, I recommend using the following structure for maximum benefit.
+
+$ sudo zypper fresh && sudo zypper update
+	
+*Arch
+-------
+-pacman
+
+Installing packages
+A package is an archive containing:
+
+all of the (compiled) files of an application
+metadata about the application, such as application name, version, dependencies, ...
+installation files and directives for pacman
+(optionally) extra files to make your life easier, such as a start/stop script
+Arch's package manager pacman can install, update, and remove those packages. Using packages instead of compiling and installing programs yourself has various benefits:
+
+easily updatable: pacman will update existing packages as soon as updates are available
+dependency checks: pacman handles dependencies for you, you only need to specify the program and pacman installs it together with every other program it needs
+clean removal: pacman has a list of every file in a package; this way, no files are unintentionally left behind when you decide to remove a package.
+Note:
+Packages often have optional dependencies which are packages that provide additional functionality to the application but not strictly required for running it. When installing a package, pacman will list a package's optional dependencies, but they will not be found in pacman.log. Use the #Querying package databases command to view the optional dependencies of a package.
+When installing a package which you require only as (optional) dependency of some other package (i.e. not required by you explicitly otherwise), it is recommended to use --asdeps option. For details see the #Installation reason section.
+
+**Warning: When installing packages in Arch, avoid refreshing the package list without upgrading the system (for example, when a package is no longer found in the official repositories). In practice, do not run pacman -Sy package_name instead of pacman -Syu package_name, as this could lead to dependency issues. See System maintenance#Partial upgrades are unsupported and BBS#89328.
+Installing specific packages
+To install a single package or list of packages, including dependencies, issue the following command:
+
+# pacman -S package_name1 package_name2 ...
+To install a list of packages with regex (see this forum thread):
+
+# pacman -S $(pacman -Ssq package_regex)
+
+
+*Bsd/MacOS
+----------
+-homebrew
+
+**PM for scripting languages
+------------
+
+-pip (python)
+	
+“Requirements files” are files containing a list of items to be installed using pip install like so:
+
+python -m pip install -r requirements.txt
+
+Constraints files are requirements files that only control which version of a requirement is installed, not whether it is installed or not. Their syntax and contents is nearly identical to Requirements Files. There is one key difference: Including a package in a constraints file does not trigger installation of the package.
+
+Use a constraints file like so:
+
+python -m pip install -c constraints.txt
+
+Installing from Wheels¶
+“Wheel” is a built, archive format that can greatly speed installation compared to building and installing from source archives. For more information, see the Wheel docs , PEP 427, and PEP 425.
+
+pip prefers Wheels where they are available. To disable this, use the --no-binary flag for pip install.
+
+If no satisfactory wheels are found, pip will default to finding source archives.
+
+To install directly from a wheel archive:
+
+python -m pip install SomePackage-1.0-py2.py3-none-any.whl
+
+-npm (js)
+
+npm install -g npm
+
+-ppm (perl)
+
+
+References
+-----------
+
+https://ubuntu.com/server/docs/package-management
+
+https://fedoraproject.org/wiki/DNF?rd=Dnf
+
+https://linuxhint.com/opensuse_package_manager/
+
+https://www.redhat.com/sysadmin/how-manage-packages
+
+https://www.npmjs.com/
+
+https://pypi.org/project/pip/
+
+https://docs.python.org/3/library/venv.html
+
+https://metacpan.org/pod/distribution/PPM/bin/ppm.pl
+
+
+*******************************************
+* Linux Installation & Package Management *
+*******************************************
+03 01. Filesystem-Volumes & Directories
+---------------------------------------
+
+FS, Volumes and Directories
+---------------------------
+* Local Filesystem:
+  * Formatted partition, volume, RAID array
+*A FS is mounted on a directory
+*A FS is always mounted on /
+  * The top-level root directory (own dedicated)
+
+ls /
+\ls /
+
+Other Directory Mount Points
+----------------------------
+*  /boot - with Linux kernel, GRUB
+  * A dedicated partition protects the kernel
+  * Do not mount on a logical volume
+ * /home - user home directories (own FS)
+  * Facilitates backups
+
+ * /var - log files, FTP services, web services
+  * Protects system for large log, FTP files
+
+df command
+ls /boot
+
+Special Mount Point
+* Linux uses dedicated Swap Space
+   * Partition or Logical Volume
+   * Typical 2X RAM
+
+This directories ar mount points for a given volume
+No need to have swap on RAID array
+ mount cmd
+
+03 02. GRUB & Filesystems
+---------------------------------------
+GRUB & Filesystems
+------------------
+* Install a pointer to GRUB
+  * grub-install command
+    * Add pointer to MBR (Master Boot Record)
+    * Uses first available hard drive
+  * Can specify drive or partition
+    * grub-install /dev/hda : first PATA drive
+    * grub-install /dev/sda : first SATA or SCSI drive
+
+is only read by BIOS if installed in one of first 2 hard drives
+
+grub-install hd0  //install the pointer in first hard drive, but  grub-install /dev/hda is a better option
+
+The grub Command
+ * Starts the grub> prompt
+ * Available from GRUB menu
+ * help access available commands
+ * Can reconstruct GRUB configuration
+
+grub command - grub help
+grub-install /dev/sda1
+quit
+
+The superblock
+ * The first sector of a filesystem
+   * May include pointer to GRUB
+   * Includes disk block usage, cylinders, inodes, location, filesystem size
+ * Identify backup superblocks
+   * dumpe2fs /dev/sda1 | grep superblock
+   * First backup commonly on block 8193
+
+SB can help restore ur filesystem
+Backup a number of times
+
+03 03. Identify & Install Shared Libraries
+---------------------------------------
+
+Identify Shared Libraries
+  * Library : frequently used
+    * Program, function, routine
+    * Shared by different cmds / apps
+  * Determine the shared libraries that executable programs depend on  
+
+Identify Command Libraries
+  * ldd /path/to/command
+    * Example : ldd /bin/ls
+  * ldconfig caches current libraries
+    * From /lib, /usr/lib, LD_DIRECTORY_PATH
+    * /etc/ld.so.conf, refers to /etc/ld.so.conf.d/*.conf
+    * Display libraries with ldconfig -p
+
+#ldd /bin/ls  //several libraries used to listing a file  
+#ldconfig 
+#ldconfig -p 
+#less /etc/ld.so.conf
+
+03 04. Debian Package Commands
+---------------------------------------
+Debian Package Commands
+  * Debian Packages - aslo used for Ubuntu
+  * Debian Pkgs Mgmt Tool (dpkg)
+    * .deb extensions
+  * The dpkg Command is Capable
+  * dpkg -l pkgname
+    * Confirm installation, version number, description
+
+The dpkg Cmd
+  * dpkg -l
+  	* List of all installed packages
+  * dpkg -L packagename
+    * List of files from a package
+  * dpkg -S /path/to/file
+    * Identify pkgs that owns a file
+
+More dpkg cmds
+  * dpkg -i pkgname installs package
+    * Does NOT save config files
+  * dpkg -r pkgname removes pkg
+    * Retains conf files
+  * dpkg -P pkgname remove pkg
+    * Also removes conf files  
+  * dpkg -i pkgname
+    * May not work if there are dependencies
+    * Dependency mgmt -> apt-* cmds
+    * May include conf prompts
+  *dpkg-reconfigure pkgname
+    * rerun conf prompts
+
+**Grandfather of all linux distros, RH cousin..
+**dpkg -i doesnt bkup conf files, so backup those 
+
+dpkg -r vsftpd
+ls /etc/vsftpd.conf
+dpkg -P //removes conf
+
+*dependency halts
+
+sudo dpkg-reconfigure samba
+
+03 05.  Repositories & the apt- Commands
+---------------------------------------
+  * Manages dpkg dependencies
+  * The apt-* cmds
+   * apt-get : Acquier, download, install
+     * Automatically include dependencies
+   * apt-cache : Search through repositories
+   * aptitude: Front-end to apt-get, apt-cache
+   * apt-get install pkgname
+     * Installs pkg plus deps
+   * apt-get remove pkgname
+     * Deletes pkg - and deps
+   * apt-get purge pkgname
+     * Delete pkg, deps, conf files
+   *apt-get update : installs available updates
+
+Conf files for apt-* Cmds
+   * Configured in /etc/apt/sources.list
+   * List various repositories
+     * Repositories normally networked
+     * May use shared HTTP, FTP, NFS connectio (mirrored)
+Related Cmds 
+  * apt-cache search name
+     * Searches for all pkg w/ name
+
+03 06. Red Hat Package Commands pt. 1
+---------------------------------------
+
+ * RPM pkgs : start as Linux src code
+ * Processed into RPM binaries
+   * May be installed in Linux
+   * .rpm extensions
+ * The rpm cmd is Capable
+
+rpm cmd examples
+  * rpm -q packagename
+    * Confirm installation, version number
+  * rpm -qi packagename
+  	* More package info
+  * rpm -ql packagename
+  	* List of files from a package
+  * rpm -qa
+    * List of all installed RPM packages
+  * Verify download w/rpm -K packagename
+  *rpm -i packagename
+    * Installs package
+
+
+ #rpm -q passwd
+ #rpm -ql passwd //list of pkgs dependended on
+
+#rpm -K package.rpm  //ckecksums OK
+#rpm -ivh  //install verb follow install process
+
+
+03 07. Red Hat Package Commands pt. 2
+---------------------------------------
+
+ * rpm -U packagename
+   * Upgrades or Installs
+ * rpm -F packagename
+   *Upgrades only if older version installed
+ * rpm -e packagename
+   *uninstall package
+ * rpm may not work w/dependencies
+
+  #rpm -Uvh //same as install cmd but for upgrade
+
+rpm2cpio cmd
+ * conversion tool
+ * reads rpm as data stream
+   * output to cpio archive
+ * rpm2cpio package.rpm > package.cpio
+Use cpio archive
+  * less package.cpio reads file
+
+03 08. Repositories & the yum Commands
+---------------------------------------
+
+* Manages rpm dependencies
+  * yum command 
+  	* Yellowdog updater, modifier
+  * yum install packagename
+    * Installs packagename, with dependencies
+  * yum reveals options
+   * Deletes packages -and dependencies
+  *yum info packagename
+   * provides more information on that package
+  *yum check-update: available information
+  *yum update : install available updates 
+
+ Configuration files for yum
+  * Configured in /etc/yum.conf
+  * Points to repositories in /etc/yum.reps.d/
+    * e.g CentOS-Base.repo
+    * Lists repositories by stanza
+    * Does not apply to RHE 5 or up
+
+
+***www.vtc.com - VTC Linux Profesional Certification
+
+
+

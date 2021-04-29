@@ -1,0 +1,159 @@
+
+
+Bash + cmd line cmds overview
+---------------
+
+1.-basic commands
+
+pwd
+echo
+test
+grep
+whoami
+whereis
+df
+du
+ls/ll
+top/htop
+sleep
+date
+ssh
+wget
+scp
+clear
+cat
+time
+uptime
+history
+ps 
+printf  - reporting useful
+
+source load vars from a different file
+sudo
+visudo   - user priviledges
+
+man
+
+console editors: vi/vim, emacs, nano, pico
+
+ui editors: sublime, atom, komodo, eclipse, intelliJ
+
+2.-user priveleges
+
+chown to change owner from root to self user
+chmod +x  to make an script executable	
+chmod 764
+
+echo -n  doesnt jump to next line
+
+read capture output into a variable
+
+3.-script components
+
+Type of shell:
+#!bash   (+x) if u want script to continue even when it fails
+
+Environmet variable declaration:export something
+
+Calling variable:
+$something
+
+input parameters
+
+Functions:
+func() simplify code in structured block which can become libraries eventually 
+
+Example of function call:
+********************
+#!/bin/bash
+
+echo "1: Welcome to Bash Shell Scripting course!"
+
+function welcome_message2 {
+  echo "2: Welcome to Bash Shell Scripting course!"
+}
+
+#second way to declare a function
+welcome_message3() {
+  echo "3: Welcome to Bash Shell Scripting course!"
+}
+
+welcome_message3
+welcome_message2
+	
+
+*********************
+
+script input parameter
+
+
+script.sh Mona LakeTahoe
+
+echo ¨{1} vacation at {2}"
+
+Input Variables
+NAME=$1
+CITY=$2
+
+echo ¨${NAME} vacations at ${CITY}"
+echo ¨$1 vacation at $2"
+
+output redirection:
+
+   script.sh > out.log
+  
+tee command
+
+pipe command  (|) useful when using grep
+
+4.-conditionals + loops
+
+IF
+elsif
+fi
+
+FOR
+
+WHILE
+
+5.-common system scripts
+
+
+CICD cycle Jenkins job execution
+init.d/systemd 
+installation script (apps + services)
+Configuration script (env vars)
+enviroment configuration
+data metrics collectin scripts: 
+hostname Ip Address CPU load memory usage
+
+6.example + execution
+
+https://www.techbrown.com/most-useful-bash-scripts-linux-system-administrator/
+
+7. Advanced topics
+
+Advanded tools: 
+sed & awk 
+regular expressions
+emacs
+vi
+curl
+git
+netstats
+
+debuggin scripts
+Bash vulnerabilties (Linux security)
+
+links:
+https://www.techbrown.com/most-useful-bash-scripts-linux-system-administrator/
+
+https://opensource.com/article/20/4/bash-sysadmins-ebook
+
+https://www.pluralsight.com/guides/shell-scripting-with-bash-for-linux-administration-part-1
+
+Recomend courses:
+VTC - UNIX SHELL SCRIPTING ADVANCED
+
+Books:
+Wiley.Linux.Command.Line.And.Shell.Scripting.Bible.4th.Edition.2021.RETAiL.ePub.eBook-LiBRiCiDE
