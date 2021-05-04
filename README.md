@@ -1,4 +1,4 @@
-# LinuxCabal-LinuxerosGDL
+# LinuxerosGDL
 Grabaciones de nuestras reuniones semanales sobre Linux, así como todo el material didáctico expuesto.
 
 Nos reunimos todos los domingos a las 10am para aprender temas sobre linux y debatir sobre el futuro del grupo.
@@ -16,3 +16,6 @@ https://t.me/joinchat/1zW3ELLB0uc3MzBh
 * 2021-03-21 Linux básico https://prezi.com/view/mgswXgBVExWSdJ9RXQCH/
 * 2021-04-11 Seguridad báasica en linux https://prezi.com/view/YRSIq3F5rUZlZjG3X94f/
 * 2021-04-11 Grabación de la sesión completa, Andrés Sánchez nos expone manejadores de paquetes y David Muñoz seguridad básica https://www.youtube.com/watch?v=8fMon-RSh8w&t=19s
+* 2021-05-02 Ismael García nos enseña Docker y Andrés Sánchez nos explica Ansible, video completo: https://www.youtube.com/watch?v=0MhUj6zJLy0&t=4713s
+* 
+
